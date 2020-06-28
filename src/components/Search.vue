@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { debounce } from 'lodash.debounce';
+const debounce = require('lodash.debounce');
 
 import axios from 'axios';
 
@@ -39,11 +39,5 @@ export default {
     .searchWrapper{
         border: none;
         border-bottom: 1px solid black;
-        &:focus{
-            border-bottom: 2px solid white;
-        	-webkit-box-shadow: 0 8px 6px -6px white;
-	        -moz-box-shadow: 0 8px 6px -6px white;
-	        box-shadow: 0 8px 6px -6px white;
-        }
     }
 </style>
