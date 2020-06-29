@@ -1,8 +1,13 @@
 <template>
-	<div class="appWrapper">
-    <Content />
-		<Search v-model="inputValue" @input="handleInput" />
-		<Background />
+	<div class="appWrapper" :class="state ? 'start' : '' ">
+    <Content v-if="state===0"/>
+		<Search v-model="inputValue" @input="handleInput" :dark="state ===1"/>
+    <transition name="opacityChg">
+      <Background v-if="state===0"/>
+    </transition>
+    <div class="results" v-if="results && !load && state ===1">
+      <Item v-for="item in results" :key="item.data[0].nasa_id" :item="item" />
+    </div>
 	</div>
 </template>
 
@@ -12,6 +17,8 @@ import Content from '@/components/Content.vue';
 import Search from '@/components/Search.vue';
 
 import Background from '@/components/Hero.vue';
+
+import Item from '@/components/Item.vue';
 
 import axios from 'axios';
 
@@ -25,9 +32,12 @@ export default {
     Search,
     Background,
     Content,
+    Item,
   },
   data() {
     return {
+      load: false,
+      state: 0,
       inputValue: '',
       results: [],
     };
@@ -35,9 +45,12 @@ export default {
   methods: {
     // eslint-disable-next-line
 		handleInput: debounce(function () {
+      this.load = true;
       axios.get(`${Api}?q=${this.inputValue}&media_type=image`)
         .then((response) => {
           this.results = response.data.collection.items;
+          this.load = false;
+          this.state = 1;
           console.log(this.results);
         }).catch((e) => {
           console.log(e);
@@ -49,10 +62,11 @@ export default {
 
 <style lang="scss" scoped>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-  *{
-    margin:0px;
-    padding: 0px;
-    box-sizing: border-box;
+  .opacityChg-enter-active, .opacityChg-leave-active{
+    transition: opacity .5s ease;
+  }
+  .opacityChg-enter, .opacityChg-leave-to{
+    opacity:0;
   }
   .appWrapper{
 		width: 100vw;
@@ -61,5 +75,18 @@ export default {
 		justify-content: center;
 		align-items: center;
     flex-direction: column;
+    &.start{
+      justify-content: flex-start;
+      margin-top:40px;
+    }
 	}
+  .results{
+    width: 70%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap:20px;
+    align-items: center;
+    justify-items: center;
+    margin-top:20px
+  }
 </style>

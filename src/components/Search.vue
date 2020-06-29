@@ -1,5 +1,5 @@
 <template>
-    <input id="searchBar" name="search" :value="props" @input="handleChange">
+    <input id="searchBar" name="search" :value="props" @input="handleChange" :class="{dark}">
 </template>
 
 <script>
@@ -10,6 +10,10 @@ export default {
     value: {
       type: String,
       required: true,
+    },
+    dark: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
@@ -36,6 +40,14 @@ export default {
 		&:focus, &:visited{
 			border-bottom:3px solid white;
 			box-shadow: 0px 9px 16px -10px rgba(255,255,255,1);
+		}
+		&.dark{
+			color:#313235;
+			border: none;
+			border-bottom:3px solid #313235;
+			&:focus{
+				box-shadow: 0px 9px 16px -10px #313235;
+			}
 		}
 	}
 
