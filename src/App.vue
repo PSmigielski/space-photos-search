@@ -5,6 +5,7 @@
     <transition name="opacityChg">
       <Background v-if="state===0"/>
     </transition>
+    <Loader v-if="load" />
     <div class="results" v-if="results && !load && state ===1">
       <Item v-for="item in results" :key="item.data[0].nasa_id" :item="item" />
     </div>
@@ -20,6 +21,8 @@ import Background from '@/components/Hero.vue';
 
 import Item from '@/components/Item.vue';
 
+import Loader from '@/components/Loader.vue';
+
 import axios from 'axios';
 
 const debounce = require('lodash.debounce');
@@ -33,6 +36,7 @@ export default {
     Background,
     Content,
     Item,
+    Loader,
   },
   data() {
     return {
@@ -63,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
   .opacityChg-enter-active, .opacityChg-leave-active{
-    transition: opacity .5s ease;
+    transition: opacity .3s ease;
   }
   .opacityChg-enter, .opacityChg-leave-to{
     opacity:0;
