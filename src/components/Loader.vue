@@ -1,8 +1,11 @@
 <template>
+  <transition name="spin">
     <div class="circle1">
-      <div class="circle2">
-      </div>
+      <transition name="spin2">
+        <div class="circle2"></div>
+      </transition>
     </div>
+  </transition>
 </template>
 
 <script>
@@ -12,6 +15,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.spin-enter-active {
+  animation: spin .5s linear infinite;
+}
+.spin-leave-active {
+  animation: spin .5s linear infinite;
+}
+.spin2-enter-active {
+  animation: spin .5s linear infinite;
+}
+.spin2-leave-active {
+  animation: spin .5s linear infinite;
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -39,9 +54,9 @@ export default {
   width: 30px;
   height: 30px;
   border: 5px solid red;
-  border-right: 5px solid white;
+  border-right: 5px solid transparent;
   border-bottom: 5px solid red;
-  border-top: 5px solid white;
+  border-top: 5px solid transparent;
   border-left: 5px solid red;
   border-radius: 50%;
   box-sizing: border-box;
