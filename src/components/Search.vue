@@ -1,32 +1,42 @@
 <template>
-    <div class="searchWrapper">
-        <label for="searchBar">search</label>
-        <input id="searchBar" name="search" :value="props" @input="handleChange">
-    </div>
+    <input id="searchBar" name="search" :value="props" @input="handleChange">
 </template>
 
 <script>
 
-
 export default {
-	name: 'Search',
-	props: {
-		value:{
-			type:String,
-			required:true,
-		}
-	},
-	methods:{
-		handleChange(e){
-			this.$emit('input', e.target.value);
-		}
-	}
+  name: 'Search',
+  props: {
+    value: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    handleChange(e) {
+      this.$emit('input', e.target.value);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-    .searchWrapper{
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+    input{
         border: none;
-        border-bottom: 1px solid black;
-    }
+		width: 300px;
+		height: 30px;
+		font-family: 'Poppins',sans-serif;
+        border-bottom: 3px solid black;
+		transition: all .3s ease-in-out;
+		color:white;
+		text-align: center;
+		font-size: 24px;
+		background: none;
+		&:focus, &:visited{
+			border-bottom:3px solid white;
+			box-shadow: 0px 9px 16px -10px rgba(255,255,255,1);
+		}
+	}
+
 </style>
