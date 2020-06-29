@@ -73,8 +73,8 @@ export default {
     opacity:0;
   }
   .appWrapper{
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		min-height: 100vh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -92,5 +92,16 @@ export default {
     align-items: center;
     justify-items: center;
     margin-top:20px
+  }
+  @media screen and (max-width: 1120px){
+    .results{
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media screen and (max-width: 880px){
+    .results{
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
   }
 </style>
