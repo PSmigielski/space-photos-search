@@ -87,11 +87,21 @@ export default {
   .results{
     width: 70%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap:20px;
     align-items: center;
     justify-items: center;
     margin-top:20px
+  }
+  @media screen and (max-width: 2630px){
+    .results{
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+    @media screen and (max-width: 2090px){
+    .results{
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
   @media screen and (max-width: 1120px){
     .results{
