@@ -5,10 +5,11 @@
     <transition name="opacityChg">
       <Background v-if="state===0"/>
     </transition>
-    <Loader v-if="load" />
     <div class="results" v-if="results && !load && state ===1">
-      <Item v-for="item in results" :key="item.data[0].nasa_id" :item="item" />
+      <Item v-for="item in results" :key="item.data[0].nasa_id" :item="item" @click.native="handleDetailsOpen(item)" />
     </div>
+    <Loader v-if="load && state === 1" />
+    <Details v-if="detailsOpen" :item="detailsItem" @closeDetails="detailsOpen = false" />
 	</div>
 </template>
 
@@ -22,6 +23,8 @@ import Background from '@/components/Hero.vue';
 import Item from '@/components/Item.vue';
 
 import Loader from '@/components/Loader.vue';
+
+import Details from '@/components/Details.vue';
 
 import axios from 'axios';
 
@@ -37,9 +40,12 @@ export default {
     Content,
     Item,
     Loader,
+    Details,
   },
   data() {
     return {
+      detailsOpen: false,
+      detailsItem: null,
       load: false,
       state: 0,
       inputValue: '',
@@ -47,6 +53,10 @@ export default {
     };
   },
   methods: {
+    handleDetailsOpen(item) {
+      this.detailsOpen = true;
+      this.detailsItem = item;
+    },
     // eslint-disable-next-line
 		handleInput: debounce(function () {
       this.load = true;
