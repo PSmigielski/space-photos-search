@@ -86,11 +86,11 @@ export default {
   }
 }
 .image {
-  width: 100%;
-  height: 100%;
+  width: 60%;
+  max-height: 100%;
   img {
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 100%;
    }
 }
 .content {
@@ -111,7 +111,7 @@ h1{
  @media (min-width: 1024px) {
     .outerWrapper{
       max-width: 70%;
-      height: 60%;
+      height: 70%;
       left: 0;
       right: 0;
       top: 0;
